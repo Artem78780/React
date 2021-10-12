@@ -1,6 +1,15 @@
 import React from "react";
+import classNames from 'classnames'
 
-function PizzaBlock({ name, imageUrl, price }) {
+function PizzaBlock({ name, imageUrl, price, types }) {
+  const typeNames = ['тонкое', 'традиционное']
+  const [activeType, setActiveType] = React.useState(0);
+
+  const onSelectType = (index) => {
+    setActiveType(index);
+  };
+
+
   return (
     <div className="pizza-block">
       <img
@@ -11,8 +20,17 @@ function PizzaBlock({ name, imageUrl, price }) {
       <h4 className="pizza-block__title">{name}</h4>
       <div className="pizza-block__selector">
         <ul>
-          <li className="active">тонкое</li>
-          <li className='disable'>традиционное</li>
+          {typeNames.map((type, index) => (
+          <li 
+          key = {type}
+          onClick={() => onSelectType(index)}
+          className={classNames({
+            active: activeType === index,
+            disabled: !types.includes(index),
+          })}>
+            {type}</li>
+          ))}
+          
         </ul>
         <ul>
           <li className="active">26 см.</li>
