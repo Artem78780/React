@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import { Route } from "react-router-dom";
 import { Header } from './components/'
 import { Home, Cart } from "./components/pages";
-import { setPizzas } from "./redux/action/pizzas";
+import { setPizzas  } from "./redux/action/pizzas";
 
 
 
