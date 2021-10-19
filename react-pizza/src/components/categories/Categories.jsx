@@ -7,7 +7,7 @@ const Categories = React.memo(
    
     const onSelectItem = (index) => {
       setActiveItem(index);
-      onClickItem(index)
+      onClickItem(index);
     }
     return (
       <div>
