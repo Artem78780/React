@@ -1,7 +1,9 @@
 import React from "react";
 import classNames from "classnames";
+import { Button } from "..";
 
-function PizzaBlock({ name, imageUrl, price, types, sizes }) {
+
+function PizzaBlock({ id, name, imageUrl, price, types, sizes, onClickAddPizza }) {
   const availableTypes = ["тонкое", "традиционное"];
   const availableSize = [26, 30, 40];
 
@@ -15,6 +17,19 @@ function PizzaBlock({ name, imageUrl, price, types, sizes }) {
   const onSelectSize = (index) => {
     setActiveSize(index);
   };
+
+  const onAddPizza = () => {
+    const obj = {
+      id,
+      name,
+      imageUrl,
+      price,
+      size: activeSize,
+      type: activeType
+
+    }
+    onClickAddPizza (obj)
+  }
 
   return (
     <div className="pizza-block">
@@ -52,7 +67,8 @@ function PizzaBlock({ name, imageUrl, price, types, sizes }) {
       </div>
       <div className="pizza-block__bottom">
         <div className="pizza-block__price">от {price} ₴</div>
-        <div className="button button--outline button--add">
+        <Button onClick={onAddPizza}
+           className='button--add' outline>
           <svg
             width="12"
             height="12"
@@ -67,14 +83,11 @@ function PizzaBlock({ name, imageUrl, price, types, sizes }) {
           </svg>
           <span>Добавить</span>
           <i>2</i>
-        </div>
+        </Button>
       </div>
     </div>
   );
 }
-
-
-
 
 
 

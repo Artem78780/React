@@ -10,8 +10,8 @@ import { fetchPizzas } from "../../redux/action/pizzas";
 const categoryNames = ["Мясные", "Вегетарианская", "Гриль", "Острые", "Закрытые"];
 const sortItems = [
   { name: "популярности", type: 'popular', order: 'desc' },
-  { name: "цене", type: 'price',  order: 'desc' },
-  { name: "алфавит", type: 'name',  order: 'asc' },
+  { name: "цене", type: 'price', order: 'desc' },
+  { name: "алфавит", type: 'name', order: 'asc' },
 ];
 
 function Home() {
@@ -22,7 +22,7 @@ function Home() {
 
   React.useEffect(() => {
 
-    dispatch(fetchPizzas( sortBy, category))
+    dispatch(fetchPizzas(sortBy, category))
   }, [category, sortBy])
 
   const onSelectCategory = React.useCallback((index) => {
@@ -34,23 +34,29 @@ function Home() {
   }, []);
 
 
-  return ( 
+  return (
     <div className="container">
       <div className="content__top">
         <Categories
           activeCategory={category}
           onClickCategory={onSelectCategory}
           items={categoryNames} />
-        <SortPopup 
-          activeSortType={sortBy.type} 
-          items={sortItems} 
+        <SortPopup
+          activeSortType={sortBy.type}
+          items={sortItems}
           onClickSortType={onSelectSortType}
         />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
         {isLoaded
-          ? items.map((obj) => <PizzaBlock key={obj.id} isLoading={true} {...obj} />)
+          ? items.map((obj) => (
+            <PizzaBlock
+              onClickAddPizza={(obj) => console.log(obj)}
+              key={obj.id}
+              isLoading={true}
+              {...obj} />
+            ))
           : Array(12).fill(0)
             .map((_, index) => <LoadingBlock key={index} />)}
       </div>
