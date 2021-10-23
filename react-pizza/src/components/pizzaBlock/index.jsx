@@ -3,12 +3,12 @@ import classNames from "classnames";
 import { Button } from "..";
 
 
-function PizzaBlock({ id, name, imageUrl, price, types, sizes, onClickAddPizza }) {
+function PizzaBlock({ id, name, imageUrl, price, types, sizes, onClickAddPizza, addedCount }) {
   const availableTypes = ["тонкое", "традиционное"];
   const availableSize = [26, 30, 40];
 
   const [activeType, setActiveType] = React.useState(types[0]);
-  const [activeSize, setActiveSize] = React.useState(sizes[0]);
+  const [activeSize, setActiveSize] = React.useState(0);
 
   const onSelectType = (index) => {
     setActiveType(index);
@@ -24,8 +24,8 @@ function PizzaBlock({ id, name, imageUrl, price, types, sizes, onClickAddPizza }
       name,
       imageUrl,
       price,
-      size: activeSize,
-      type: activeType
+      size: availableSize[activeSize],
+      type: availableTypes[activeType]
 
     }
     onClickAddPizza (obj)
@@ -82,7 +82,7 @@ function PizzaBlock({ id, name, imageUrl, price, types, sizes, onClickAddPizza }
             />
           </svg>
           <span>Добавить</span>
-          <i>2</i>
+         {addedCount && <i>{addedCount}</i>}
         </Button>
       </div>
     </div>
