@@ -1,8 +1,20 @@
 import React from "react";
+import  Button  from "../button/Button";
 
+const CartItem = ({id, name, type, size, totalPrice, totalCount, onRemove, onPlus, onMinus}) =>{
+    const handleRemoveClick = () =>{
+      onRemove(id)
+    }
 
-const CartItem = ({name, type, size}) =>{
-    return(
+    const handlePluseItems = () =>{
+      onPlus(id);
+    }
+
+    const handleMinusItems = () =>{
+      onMinus(id);
+    }
+
+  return(
         <div className="cart__item">
               <div className="cart__item-img">
                 <img
@@ -16,7 +28,8 @@ const CartItem = ({name, type, size}) =>{
                 <p>{type} тесто, {size} см.</p>
               </div>
               <div className="cart__item-count">
-                <div className="button button--outline button--circle cart__item-count-minus">
+                <div onClick={handleMinusItems}
+                className="button button--outline button--circle cart__item-count-minus">
                   <svg
                     width="10"
                     height="10"
@@ -34,8 +47,9 @@ const CartItem = ({name, type, size}) =>{
                     />
                   </svg>
                 </div>
-                <b>2</b>
-                <div className="button button--outline button--circle cart__item-count-plus">
+                <b>{totalCount}</b>
+                <div onClick={handlePluseItems}
+                className="button button--outline button--circle cart__item-count-plus">
                   <svg
                     width="10"
                     height="10"
@@ -55,10 +69,10 @@ const CartItem = ({name, type, size}) =>{
                 </div>
               </div>
               <div className="cart__item-price">
-                <b>770 ₽</b>
+                <b>{totalPrice} ₴</b>
               </div>
-              <div className="cart__item-remove">
-                <div className="button button--outline button--circle">
+              <div  className="cart__item-remove">
+                <Button onClick={handleRemoveClick} className='button--circle' outline>
                   <svg
                     width="10"
                     height="10"
@@ -75,7 +89,7 @@ const CartItem = ({name, type, size}) =>{
                       fill="#EB5A1E"
                     />
                   </svg>
-                </div>
+                </Button>
               </div>
             </div>
     )
